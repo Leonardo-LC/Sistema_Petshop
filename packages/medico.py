@@ -9,3 +9,6 @@ class Medico(Funcionario):
         super().__init__(nome, telefone, email, cpf, turno,
                          data_admissao, salario, departamento, nivel_acesso)
         self.crmv = crmv
+
+
+
