@@ -3,7 +3,7 @@ import json
 class Serializador:
 
     def __init__(self, arquivo):
-        self.__arquivo = "packages/controllers/database" + arquivo
+        self.__arquivo = "packages/controllers/database/" + arquivo
         self.__models = []
         self.read()
 
@@ -32,7 +32,7 @@ class Serializador:
 
     def __erase(self,model): #Trabalhar lógica de apagar funcionário
         try:
-            self.__models.pop((vars(model)))
+            self.__models.remove((vars(model)))
             self.save()
         except Exception as erro:
             print(f'Não foi possível demitir o funcionário: `{erro}')

@@ -12,4 +12,4 @@ class Cliente(Pessoa):
         return f'Cliente: {self.nome} - Telefone: {self.telefone} = Pets: {self.pets}'
 
     def adicionar_pet(self,pet):
-        self.pets.append(vars(Animal()))
+        self.pets.append(vars(pet))

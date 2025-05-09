@@ -1,4 +1,6 @@
 from packages.controllers.serializador import Serializador
+from packages.models.animal import Animal
+from packages.models.cliente import Cliente
 from packages.models.medicovet import MedicoVet
 from packages.models.gerente import Gerente
 import webbrowser
@@ -7,4 +9,62 @@ class Petshop:
 
     def __init__(self,razao_social):
         self.razao_social = razao_social
-        self.clientes = Serializador("")
+        self.clientes = Serializador("database_clientes.json")
+        self.medicos = Serializador("database_medicos.json")
+        self.gerentes = Serializador("database_gerentes.json")
+
+        self.opcoes= {
+            '1': self.cadastrar_cliente,
+            #'2': self.remover_cliente,
+            #'3': self.contratar_gerente,
+            #'4': self.contratar_medico,
+            #'5': self.demitir_medico,
+            #'6': self.mostrar_funcionarios_html,
+            #'7': self.sair
+
+        }
+
+    def menu(self):
+        output = True
+        while output:
+            opcao_escolhida = input("Digite o número da ação desejada: \n"
+                                    "1 - Cadastrar Cliente\n"
+                                    "2 - Remover Cliente\n"
+                                    "3 - Contratar Gerente\n"
+                                    "4 - Contratar Medico\n"
+                                    "5 - Demitir Medico\n"
+                                    "6 - Gerar relatório\n"
+                                    "7 - Sair")
+            output = self.opcoes.get(opcao_escolhida, self.default)()
+
+    def default(self):
+        print('Escolha uma dos números listados nas opçãos abaixo:')
+        return True
+
+    def sair(self):
+        print(f'Desligando programa...')
+        return False
+
+    def cadastrar_cliente(self):
+        nome = input('Digite o nome do cliente: ')
+        email = input('Digite o email do cliente: ')
+        telefone = input('Digite o telefone do cliente: ')
+        if not self.clientes.verify_number(telefone):
+            cliente = Cliente(nome, email, telefone)
+            print(f'O cliente {nome} foi adicionado com sucesso!')
+            self.clientes.adicionar_cliente(cliente)
+        else:
+            print(f'O cliente já está cadastrado!')
+
+        adiciona_pet = True
+        while adiciona_pet:
+            quantidade = int(input("Digite quantos pets o cliente possui: "))
+            for i in range(quantidade):
+                nome_pet = input(f'Digite o nome do pet: ')
+                idade = input(f'Digite a idade do pet: ')
+                peso = input(f"Difite o peso do pet: ")
+                tipo = input(f'Digite o tipo do animal: ')
+                pet = Animal(nome_pet, int(idade), float(peso), tipo, cliente)
+            return False
+
+
