@@ -1,0 +1,23 @@
+[
+    {
+        "nome": "Charles Darwin",
+        "email": "DarwingBiologia@outlook.com",
+        "telefone": "61 123222222",
+        "pets": [
+            {
+                "nome": "Tom",
+                "idade": 5,
+                "peso": 4.8,
+                "tipo": "Gato",
+                "dono_nome": "Charles Darwin"
+            },
+            {
+                "nome": "Jerry",
+                "idade": 1,
+                "peso": 0.045,
+                "tipo": "Hamster",
+                "dono_nome": "Charles Darwin"
+            }
+        ]
+    }
+]
