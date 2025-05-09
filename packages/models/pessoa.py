@@ -8,4 +8,5 @@ class Pessoa(ABC):
         self.email = email
 
     def __str__(self):
-        return f"{self.nome} - {self.telefone}"
+
+        return f"{self.nome} - {self.telefone} - {self.email}"
