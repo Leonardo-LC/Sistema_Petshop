@@ -48,8 +48,8 @@ class Petshop:
 
     def cadastrar_cliente(self):
         nome = input('Digite o nome do cliente: ')
-        email = input('Digite o email do cliente: ')
-        telefone = input('Digite o telefone do cliente: ')
+        email = input('Digite o telefone do cliente: ')
+        telefone = input('Digite o email do cliente: ')
 
         if not self.clientes.verify_number(telefone):
             cliente = Cliente(nome, email, telefone)
@@ -61,7 +61,7 @@ class Petshop:
                 peso = input(f"Difite o peso do pet: ")
                 tipo = input(f'Digite o tipo do animal: ')
                 pet = Animal(nome_pet, int(idade), float(peso), tipo, cliente)
-                cliente.adicionar_pet(pet)
+                #cliente.adicionar_pet(pet)
 
             self.clientes.adicionar_cliente(cliente)
             print(f'Cliente {cliente} adicionado com sucesso!')

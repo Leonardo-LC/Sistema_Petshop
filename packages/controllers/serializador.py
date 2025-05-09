@@ -25,17 +25,17 @@ class Serializador:
 
     def __write(self, model):
         try:
-            self.__models.append(vars(model))
+            self.__models.append(model.to_dict())  # Usa to_dict() em vez de vars()
             self.save()
         except Exception as erro:
             print(f'Erro ao adicionar {erro}')
 
-    def __erase(self,model): #Trabalhar lógica de apagar funcionário
+    def __erase(self, model):
         try:
-            self.__models.remove((vars(model)))
+            self.__models.remove(model.to_dict())  # Usa to_dict() em vez de vars()
             self.save()
         except Exception as erro:
-            print(f'Não foi possível demitir o funcionário: `{erro}')
+            print(f'Não foi possível remover: {erro}')
 
     def get_models(self):
         return self.__models

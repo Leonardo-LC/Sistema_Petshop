@@ -7,9 +7,15 @@ class Cliente(Pessoa):
         super().__init__(nome, email, telefone)
         self.pets = []
 
+    def to_dict(self):
+        return {
+            "nome": self.nome,
+            "email": self.email,
+            "telefone": self.telefone,
+            "pets": [pet.to_dict() for pet in self.pets]}
 
     def __str__(self):
         return f'Cliente: {self.nome} - Telefone: {self.telefone} = Pets: {self.pets}'
 
     def adicionar_pet(self,pet):
-        self.pets.append(vars())
+        self.pets.append(pet)
