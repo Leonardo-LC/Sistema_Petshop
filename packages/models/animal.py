@@ -10,5 +10,7 @@ class Animal(ABC):
         self.dono = dono
         dono.pets.append(self)
 
+
+
     def __str__(self):
         return f'{self.nome} ({self.tipo}) - {self.idade} anos - {self.peso}kg - Dono: {self.dono.nome}'

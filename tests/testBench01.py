@@ -1,1 +1,0 @@
-#Este teste bench testa o 'metodo cadastrar usuário' na versão do programa do commit 'testBench01 - cadastrar usuario'

@@ -34,7 +34,8 @@ class Petshop:
                                     "4 - Contratar Medico\n"
                                     "5 - Demitir Medico\n"
                                     "6 - Gerar relatório\n"
-                                    "7 - Sair")
+                                    "7 - Sair\n"
+                                    "Digite aqui: ")
             output = self.opcoes.get(opcao_escolhida, self.default)()
 
     def default(self):
@@ -49,22 +50,21 @@ class Petshop:
         nome = input('Digite o nome do cliente: ')
         email = input('Digite o email do cliente: ')
         telefone = input('Digite o telefone do cliente: ')
+
         if not self.clientes.verify_number(telefone):
             cliente = Cliente(nome, email, telefone)
-            print(f'O cliente {nome} foi adicionado com sucesso!')
-            self.clientes.adicionar_cliente(cliente)
-        else:
-            print(f'O cliente já está cadastrado!')
 
-        adiciona_pet = True
-        while adiciona_pet:
             quantidade = int(input("Digite quantos pets o cliente possui: "))
             for i in range(quantidade):
-                nome_pet = input(f'Digite o nome do pet: ')
+                nome_pet = input(f'Digite o nome do {i+1}º pet: ')
                 idade = input(f'Digite a idade do pet: ')
                 peso = input(f"Difite o peso do pet: ")
                 tipo = input(f'Digite o tipo do animal: ')
                 pet = Animal(nome_pet, int(idade), float(peso), tipo, cliente)
-            return False
+                cliente.adicionar_pet(pet)
 
+            self.clientes.adicionar_cliente(cliente)
+            print(f'Cliente {cliente} adicionado com sucesso!')
+        else:
+            print(f'O cliente já possui cadastro no sistema!')
 
