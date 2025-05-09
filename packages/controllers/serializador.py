@@ -10,7 +10,7 @@ class Serializador:
     def save(self):
         try:
             with open(self.__arquivo, "w") as fjson:
-                json.dump(self.__models, fjson, ident=4, ensure_ascii=False)
+                json.dump(self.__models, fjson, indent=4, ensure_ascii=False)
         except Exception as erro:
             print(f'Erro durante o salvamento dos dados: {erro}')
 
@@ -19,7 +19,7 @@ class Serializador:
         try:
             with open(self.__arquivo, "r") as fjson:
                 self.__models = json.load(fjson)
-        except FileExistsError:
+        except FileNotFoundError:
             print(f'Arquivo inexistente')
             self.__models = []
 
@@ -30,8 +30,34 @@ class Serializador:
         except Exception as erro:
             print(f'Erro ao adicionar {erro}')
 
-    #def __erase(self,model)    #Trabalhar lógica de apagar funcionário
+    def __erase(self,model): #Trabalhar lógica de apagar funcionário
+        try:
+            self.__models.pop((vars(model)))
+            self.save()
+        except Exception as erro:
+            print(f'Não foi possível demitir o funcionário: `{erro}')
 
     def get_models(self):
         return self.__models
+
+    def verify_number(self,telefone):
+        for model in self.__models:
+            if telefone == model["telefone"]:
+                return True
+        return False
+
+
+#Parte que cuida da adição e subtração no banco de dados
+
+    def contratar(self,model):
+        self.__write(model)
+
+    def demitir(self,model):
+        self.__erase(model)
+
+    def adicionar_cliente(self,model):
+        self.__write(model)
+
+    def remover_cliente(self,model):
+        self.__erase(model)
 
