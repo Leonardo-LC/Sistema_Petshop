@@ -48,14 +48,14 @@ class Petshop:
 
     def cadastrar_cliente(self):
         nome = input('Digite o nome do cliente: ')
-        email = input('Digite o telefone do cliente: ')
-        telefone = input('Digite o email do cliente: ')
+        email = input('Digite o email do cliente: ')
+        telefone = input('Digite o telefone do cliente: ')
 
         #remover linha abaixo depois
         #print([cliente.telefone for cliente in self.clientes.get_models()])
 
         if not self.clientes.verify_number(telefone):
-            cliente = Cliente(nome, email, telefone)
+            cliente = Cliente(nome, telefone, email)
 
             quantidade = int(input("Digite quantos pets o cliente possui: "))
             for i in range(quantidade):
@@ -70,6 +70,6 @@ class Petshop:
             print(f'Cliente {cliente} adicionado com sucesso!')
 
         else:
-            print(f'O cliente já possui cadastro no sistema!')
+            print(f'O cliente {nome} já possui cadastro no sistema!')
         return True
 

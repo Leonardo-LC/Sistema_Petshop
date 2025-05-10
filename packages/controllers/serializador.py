@@ -41,7 +41,7 @@ class Serializador:
         return self.__models
 
     def verify_number(self,telefone):
-        for model in self.__models:
+        for model in self.get_models():
             if telefone == model["telefone"]:
                 return True
         return False
