@@ -25,14 +25,14 @@ class Serializador:
 
     def __write(self, model):
         try:
-            self.__models.append(model.to_dict())  # Usa to_dict() em vez de vars()
+            self.__models.append(model.to_dict())
             self.save()
         except Exception as erro:
             print(f'Erro ao adicionar {erro}')
 
     def __erase(self, model):
         try:
-            self.__models.remove(model.to_dict())  # Usa to_dict() em vez de vars()
+            self.__models.remove(model.to_dict())
             self.save()
         except Exception as erro:
             print(f'Não foi possível remover: {erro}')

@@ -51,6 +51,9 @@ class Petshop:
         email = input('Digite o telefone do cliente: ')
         telefone = input('Digite o email do cliente: ')
 
+        #remover linha abaixo depois
+        #print([cliente.telefone for cliente in self.clientes.get_models()])
+
         if not self.clientes.verify_number(telefone):
             cliente = Cliente(nome, email, telefone)
 
@@ -65,6 +68,8 @@ class Petshop:
 
             self.clientes.adicionar_cliente(cliente)
             print(f'Cliente {cliente} adicionado com sucesso!')
+
         else:
             print(f'O cliente já possui cadastro no sistema!')
+        return True
 
