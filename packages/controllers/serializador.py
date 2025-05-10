@@ -1,5 +1,6 @@
 import json
 
+
 class Serializador:
 
     def __init__(self, arquivo):
@@ -47,7 +48,7 @@ class Serializador:
         return False
 
 
-#Parte que cuida da adição e subtração no banco de dados
+    #Parte que cuida da adição e subtração no banco de dados
 
     def contratar(self,model):
         self.__write(model)

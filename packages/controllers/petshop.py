@@ -4,6 +4,7 @@ from packages.models.cliente import Cliente
 from packages.models.medicovet import MedicoVet
 from packages.models.gerente import Gerente
 import webbrowser
+import re
 
 class Petshop:
 
@@ -48,8 +49,23 @@ class Petshop:
 
     def cadastrar_cliente(self):
         nome = input('Digite o nome do cliente: ')
-        email = input('Digite o email do cliente: ')
-        telefone = input('Digite o telefone do cliente: ')
+        nome = nome.title()
+
+        valida_email = True
+        while valida_email:
+            email = input('Digite o email do cliente: ')
+            if not self.validar_email(email):
+                print(f'E-mail invalido! Digite um email válido.')
+            else:
+                valida_email = False
+
+        valida_telefone = True
+        while valida_telefone:
+            telefone = input('Digite o telefone do cliente: ').strip()
+            if not self.validar_telefone(telefone):
+                print("Formato de telefone inválido.")
+            else:
+                valida_telefone = False
 
         #remover linha abaixo depois
         #print([cliente.telefone for cliente in self.clientes.get_models()])
@@ -60,9 +76,11 @@ class Petshop:
             quantidade = int(input("Digite quantos pets o cliente possui: "))
             for i in range(quantidade):
                 nome_pet = input(f'Digite o nome do {i+1}º pet: ')
+                nome_pet = nome_pet.title()
                 idade = input(f'Digite a idade do pet: ')
                 peso = input(f"Difite o peso do pet: ")
                 tipo = input(f'Digite o tipo do animal: ')
+                tipo = tipo.title()
                 pet = Animal(nome_pet, int(idade), float(peso), tipo, cliente)
                 #cliente.adicionar_pet(pet)
 
@@ -96,3 +114,14 @@ class Petshop:
         else:
             print(f'O cliente {nome} não possui cadastro no sistema')
         return True
+
+
+    #Garante que o email e o telefone estejam em formato convencional
+
+    def validar_email(self, email: str) -> bool:
+        padrao = r'^[\w\.-]+@[\w\.-]+\.\w{2,}$'
+        return re.match(padrao, email) is not None
+
+    def validar_telefone(self, telefone: str) -> bool:
+        padrao = r'^\(?\d{2}\)?\s?\d{4,5}-?\d{4}$'
+        return re.match(padrao, telefone) is not None
