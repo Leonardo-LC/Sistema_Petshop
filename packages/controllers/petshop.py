@@ -15,7 +15,7 @@ class Petshop:
 
         self.opcoes= {
             '1': self.cadastrar_cliente,
-            #'2': self.remover_cliente,
+            '2': self.remover_cliente,
             #'3': self.contratar_gerente,
             #'4': self.contratar_medico,
             #'5': self.demitir_medico,
@@ -73,3 +73,26 @@ class Petshop:
             print(f'O cliente {nome} já possui cadastro no sistema!')
         return True
 
+    def remover_cliente(self):
+        nome = input(f'Digite o nome do cliente: ')
+        #email = input(f"Digite o email do cliente")
+        telefone = input(f'Digite o número do cliente {nome}: ')
+
+        if self.clientes.verify_number(telefone):
+            for dados in self.clientes.get_models():
+                if dados["telefone"] == telefone and dados["nome"] == nome:
+                    confirmacao = input(f'O(a) cliente {nome} será PERMANENTEMENTE deletado. Deseja prosseguir? S/n: ')
+                    if confirmacao.lower() == 's':
+                        self.clientes.get_models().remove(dados)
+                        self.clientes.save()
+                        print(f'O clinte {nome} foi removido com sucesso.')
+                        return True
+                    else:
+                        print(f'Operação cancelada')
+                        return True
+                else:
+                    print(f'{nome} não possui o telefone: {telefone}')
+                    return True
+        else:
+            print(f'O cliente {nome} não possui cadastro no sistema')
+        return True
