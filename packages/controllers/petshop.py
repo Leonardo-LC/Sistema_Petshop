@@ -2,8 +2,9 @@ from packages.controllers.serializador import Serializador
 from packages.models.animal import Animal
 from packages.models.cliente import Cliente
 from packages.models.medicovet import MedicoVet
-from packages.models.gerente import Gerente
+from packages.models.banhista import Banhista
 import webbrowser
+from datetime import datetime
 import re
 
 class Petshop:
@@ -12,16 +13,17 @@ class Petshop:
         self.razao_social = razao_social
         self.clientes = Serializador("database_clientes.json")
         self.medicos = Serializador("database_medicos.json")
-        self.gerentes = Serializador("database_gerentes.json")
+        self.banhista = Serializador("database_banhistas.json")
 
         self.opcoes= {
             '1': self.cadastrar_cliente,
             '2': self.remover_cliente,
-            #'3': self.contratar_gerente,
-            #'4': self.contratar_medico,
-            #'5': self.demitir_medico,
-            #'6': self.mostrar_funcionarios_html,
-            #'7': self.sair
+            '3': self.contratar_banhista,
+            #'4': self.demitir_medico,
+            #'5': self.contratar_medico,
+            #'6': self.demitir_medico,
+            #'7': self.mostrar_funcionarios_html,
+            #'8': self.sair
 
         }
 
@@ -31,11 +33,12 @@ class Petshop:
             opcao_escolhida = input("Digite o número da ação desejada: \n"
                                     "1 - Cadastrar Cliente\n"
                                     "2 - Remover Cliente\n"
-                                    "3 - Contratar Gerente\n"
-                                    "4 - Contratar Medico\n"
-                                    "5 - Demitir Medico\n"
-                                    "6 - Gerar relatório\n"
-                                    "7 - Sair\n"
+                                    "3 - Contratar Banhista\n"
+                                    "4 - Demitir Banhista\n"
+                                    "5 - Contratar Medico\n"
+                                    "6 - Demitir Medico\n"
+                                    "7 - Gerar relatório\n"
+                                    "8 - Sair\n"
                                     "Digite aqui: ")
             output = self.opcoes.get(opcao_escolhida, self.default)()
 
@@ -114,6 +117,31 @@ class Petshop:
         else:
             print(f'O cliente {nome} não possui cadastro no sistema')
         return True
+
+    def contratar_banhista(self):
+        nome = input('Digite o nome do banhista: ').title()
+
+        valida_email = True
+        while valida_email:
+            email = input(f'Digite o email do banhista {nome}: ')
+            if not self.validar_email(email):
+                print(f'E-mail invalido! Digite um email válido.')
+            else:
+                valida_email = False
+
+        valida_telefone = True
+        while valida_telefone:
+            telefone = input(f'Digite o telefone do banhista {nome}: ').strip()
+            if not self.validar_telefone(telefone):
+                print("Formato de telefone inválido.")
+            else:
+                valida_telefone = False
+
+        salario = float(input(f'Digite o salario do banhista: '))
+        data_admissao = datetime.now().strftime('%d/%m/%y')
+        banhista = Banhista(nome, email, telefone, salario, data_admissao)
+        self.banhista.contratar(banhista)
+        print(f'O banhista {nome} foi contratado com sucesso!')
 
 
     #Garante que o email e o telefone estejam em formato convencional
