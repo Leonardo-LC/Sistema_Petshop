@@ -19,9 +19,9 @@ class Petshop:
             '1': self.cadastrar_cliente,
             '2': self.remover_cliente,
             '3': self.contratar_banhista,
-            #'4': self.demitir_medico,
-            #'5': self.contratar_medico,
-            #'6': self.demitir_medico,
+            '4': self.contratar_medico,
+            #'5': self.demitir_medico,
+            #'6': self.demitir_funcionario,
             #'7': self.mostrar_funcionarios_html,
             #'8': self.sair
 
@@ -34,11 +34,10 @@ class Petshop:
                                     "1 - Cadastrar Cliente\n"
                                     "2 - Remover Cliente\n"
                                     "3 - Contratar Banhista\n"
-                                    "4 - Demitir Banhista\n"
-                                    "5 - Contratar Medico\n"
-                                    "6 - Demitir Medico\n"
-                                    "7 - Gerar relatório\n"
-                                    "8 - Sair\n"
+                                    "4 - Contratar Medico\n"
+                                    "5 - Demitir Funcionário\n"
+                                    "6 - Gerar Relatório\n"
+                                    "7 - Sair\n"
                                     "Digite aqui: ")
             output = self.opcoes.get(opcao_escolhida, self.default)()
 
@@ -142,7 +141,34 @@ class Petshop:
         banhista = Banhista(nome, email, telefone, salario, data_admissao)
         self.banhista.contratar(banhista)
         print(f'O banhista {nome} foi contratado com sucesso!')
+        return True
 
+    def contratar_medico(self):
+        nome = input('Digite o nome do médico: ').title()
+
+        valida_email = True
+        while valida_email:
+            email = input(f'Digite o email do médico {nome}: ')
+            if not self.validar_email(email):
+                print(f'E-mail invalido! Digite um email válido.')
+            else:
+                valida_email = False
+
+        valida_telefone = True
+        while valida_telefone:
+            telefone = input(f'Digite o telefone do médico {nome}: ').strip()
+            if not self.validar_telefone(telefone):
+                print("Formato de telefone inválido.")
+            else:
+                valida_telefone = False
+
+        crmv = input(f'Digite a CRMV do médico {nome}: ')
+        salario = float(input(f'Digite o salario do médico: '))
+        data_admissao = datetime.now().strftime('%d/%m/%y')
+        medico = MedicoVet(nome, email, telefone, salario, data_admissao, crmv)
+        self.medicos.contratar(medico)
+        print(f'O médico {nome} foi contratado com sucesso!')
+        return True
 
     #Garante que o email e o telefone estejam em formato convencional
 

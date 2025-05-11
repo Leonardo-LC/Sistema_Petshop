@@ -1,1 +1,23 @@
-[]
+[
+    {
+        "nome": "Emílio Garcia",
+        "email": "GarciaEmili123@gmail.com",
+        "telefone": "61 988888888",
+        "pets": [
+            {
+                "nome": "Kiara",
+                "idade": 8,
+                "peso": 6.3,
+                "tipo": "Cachorro",
+                "dono_nome": "Emílio Garcia"
+            },
+            {
+                "nome": "Nidoram",
+                "idade": 3,
+                "peso": 8.2,
+                "tipo": "Cachorro",
+                "dono_nome": "Emílio Garcia"
+            }
+        ]
+    }
+]

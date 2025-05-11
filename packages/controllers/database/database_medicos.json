@@ -1,1 +1,10 @@
-[]
+[
+    {
+        "nome": "Maria Helena",
+        "email": "medmariahelen@gmail.com",
+        "telefone": "61 911111111",
+        "salario": 12500.21,
+        "data_admissao": "11/05/25",
+        "CRMV": "CRMV-RJ 67890"
+    }
+]
