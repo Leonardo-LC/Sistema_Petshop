@@ -1,22 +1,49 @@
 [
     {
-        "nome": "Emílio Garcia",
-        "email": "GarciaEmili123@gmail.com",
+        "nome": "Leonardo ",
+        "email": "Leo@gmail.com",
+        "telefone": "61 922222222",
+        "pets": [
+            {
+                "nome": "Lucky",
+                "idade": 1,
+                "peso": 4.5,
+                "tipo": "Cachorro",
+                "dono_nome": "Leonardo ",
+                "servicos_contratados": [
+                    "banho",
+                    "cortar unhas",
+                    "tosa",
+                    "consulta de rotina"
+                ]
+            }
+        ]
+    },
+    {
+        "nome": "Javier ",
+        "email": "Javi@outlook.com",
         "telefone": "61 988888888",
         "pets": [
             {
-                "nome": "Kiara",
-                "idade": 8,
-                "peso": 6.3,
-                "tipo": "Cachorro",
-                "dono_nome": "Emílio Garcia"
+                "nome": "Jerry",
+                "idade": 5,
+                "peso": 6.1,
+                "tipo": "Gato",
+                "dono_nome": "Javier ",
+                "servicos_contratados": [
+                    "tosa",
+                    "banho"
+                ]
             },
             {
-                "nome": "Nidoram",
-                "idade": 3,
-                "peso": 8.2,
+                "nome": "Thor",
+                "idade": 8,
+                "peso": 12.6,
                 "tipo": "Cachorro",
-                "dono_nome": "Emílio Garcia"
+                "dono_nome": "Javier ",
+                "servicos_contratados": [
+                    "consulta"
+                ]
             }
         ]
     }
