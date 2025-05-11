@@ -6,6 +6,7 @@ class MedicoVet(Funcionario):
     def __init__(self, nome: str, email: str, telefone: str, salario: float, data_admissao: date, crmv: str):
         super().__init__(salario, data_admissao, nome, email, telefone)
         self.crmv = crmv
+        self.agenda_medico = []
 
     def to_dict(self):
         return {

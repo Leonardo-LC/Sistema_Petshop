@@ -8,6 +8,7 @@ class Animal(ABC):
         self.peso = peso
         self.tipo = tipo
         self.dono = dono
+        self.servicos_contratados = []
         dono.pets.append(self)
 
     def to_dict(self):
@@ -16,9 +17,12 @@ class Animal(ABC):
             "idade": self.idade,
             "peso": self.peso,
             "tipo": self.tipo,
-            # Evita referência circular: só armazena o nome do dono, não o objeto inteiro
-            "dono_nome": self.dono.nome if self.dono else None
+            "dono_nome": self.dono.nome if self.dono else None,
+            "servicos_contratados": self.servicos_contratados
         }
+
+    def contratar_servicos(self,servicos):
+        self.servicos_contratados.append(servicos)
 
     def __str__(self):
         return f'{self.nome} ({self.tipo}) - {self.idade} anos - {self.peso}kg - Dono: {self.dono.nome}'

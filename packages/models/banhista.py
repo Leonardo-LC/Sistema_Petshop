@@ -4,6 +4,7 @@ from datetime import date
 class Banhista(Funcionario):
     def __init__(self, nome: str, email: str, telefone: str, salario: float, data_admissao: date):
         super().__init__(salario, data_admissao, nome, email, telefone)
+        self.agenda_banhista = []
 
     def to_dict(self):
         return {

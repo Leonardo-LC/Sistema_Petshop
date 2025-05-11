@@ -30,7 +30,7 @@ class Petshop:
         output = True
         while output:
             opcao_escolhida = input("Digite o número da ação desejada: \n"
-                                    "1 - Cadastrar Cliente\n"
+                                    "1 - Agendar Cliente\n"
                                     "2 - Remover Cliente\n"
                                     "3 - Contratar Banhista\n"
                                     "4 - Contratar Medico\n"
@@ -82,8 +82,18 @@ class Petshop:
                 peso = input(f"Difite o peso do pet: ")
                 tipo = input(f'Digite o tipo do animal: ')
                 tipo = tipo.title()
+                servicos = []
+                print(f"Digite os serviços que serão realizados em {nome_pet}. Digite 'fim' para encerrar.")
+                while True:
+                    servico = input("Serviço: ").strip()
+                    if servico.lower() == "fim":
+                        break
+                    if servico:
+                        servicos.append(servico)
+
                 pet = Animal(nome_pet, int(idade), float(peso), tipo, cliente)
-                #cliente.adicionar_pet(pet)
+                for servico in servicos:
+                    pet.contratar_servicos(servico)
 
             self.clientes.adicionar_cliente(cliente)
             print(f'Cliente {cliente} adicionado com sucesso!')
@@ -93,8 +103,7 @@ class Petshop:
         return True
 
     def remover_cliente(self):
-        nome = input(f'Digite o nome do(a) cliente: ')
-        #email = input(f"Digite o email do cliente")
+        nome = input(f'Digite o nome do(a) cliente: ').title()
         telefone = input(f'Digite o número do(a) cliente {nome}: ')
 
         if self.clientes.verify_number(telefone):
@@ -173,7 +182,6 @@ class Petshop:
         nome = input('Digite o nome do(a) funcionário(a) a ser demitido: ')
         telefone = input(f'Digite o telefone do(a) funcionário(a) {nome}: ')
 
-        # Lista de tuplas com (categoria, objeto de dados)
         categorias = [("banhista", self.banhista), ("médico", self.medicos)]
 
         for cargo, modelo in categorias:
@@ -193,6 +201,7 @@ class Petshop:
 
         print('Funcionário(a) não encontrado.')
         return True
+
 
     #Garante que o email e o telefone estejam em formato convencional
 
