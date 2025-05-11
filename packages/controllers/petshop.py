@@ -20,10 +20,9 @@ class Petshop:
             '2': self.remover_cliente,
             '3': self.contratar_banhista,
             '4': self.contratar_medico,
-            #'5': self.demitir_medico,
-            #'6': self.demitir_funcionario,
-            #'7': self.mostrar_funcionarios_html,
-            #'8': self.sair
+            '5': self.demitir_funcionario,
+            #'6': self.mostrar_funcionarios_html,
+            #'7': self.sair
 
         }
 
@@ -50,12 +49,12 @@ class Petshop:
         return False
 
     def cadastrar_cliente(self):
-        nome = input('Digite o nome do cliente: ')
+        nome = input('Digite o nome do(a) cliente: ')
         nome = nome.title()
 
         valida_email = True
         while valida_email:
-            email = input('Digite o email do cliente: ')
+            email = input(f'Digite o email do(a) cliente {nome}: ')
             if not self.validar_email(email):
                 print(f'E-mail invalido! Digite um email válido.')
             else:
@@ -63,7 +62,7 @@ class Petshop:
 
         valida_telefone = True
         while valida_telefone:
-            telefone = input('Digite o telefone do cliente: ').strip()
+            telefone = input(f'Digite o telefone do(a) cliente {nome}: ').strip()
             if not self.validar_telefone(telefone):
                 print("Formato de telefone inválido.")
             else:
@@ -75,7 +74,7 @@ class Petshop:
         if not self.clientes.verify_number(telefone):
             cliente = Cliente(nome, telefone, email)
 
-            quantidade = int(input("Digite quantos pets o cliente possui: "))
+            quantidade = int(input(f"Digite quantos pets o(a) cliente {nome} possui: "))
             for i in range(quantidade):
                 nome_pet = input(f'Digite o nome do {i+1}º pet: ')
                 nome_pet = nome_pet.title()
@@ -90,22 +89,22 @@ class Petshop:
             print(f'Cliente {cliente} adicionado com sucesso!')
 
         else:
-            print(f'O cliente {nome} já possui cadastro no sistema!')
+            print(f'O(A) cliente {nome} já possui cadastro no sistema!')
         return True
 
     def remover_cliente(self):
-        nome = input(f'Digite o nome do cliente: ')
+        nome = input(f'Digite o nome do(a) cliente: ')
         #email = input(f"Digite o email do cliente")
-        telefone = input(f'Digite o número do cliente {nome}: ')
+        telefone = input(f'Digite o número do(a) cliente {nome}: ')
 
         if self.clientes.verify_number(telefone):
             for dados in self.clientes.get_models():
                 if dados["telefone"] == telefone and dados["nome"] == nome:
-                    confirmacao = input(f'O(a) cliente {nome} será PERMANENTEMENTE deletado. Deseja prosseguir? S/n: ')
+                    confirmacao = input(f'O(a) cliente {nome} será PERMANENTEMENTE deletado(a). Deseja prosseguir? S/n: ')
                     if confirmacao.lower() == 's':
                         self.clientes.get_models().remove(dados)
                         self.clientes.save()
-                        print(f'O clinte {nome} foi removido com sucesso.')
+                        print(f'O cliente {nome} foi removido(a) com sucesso.')
                         return True
                     else:
                         print(f'Operação cancelada')
@@ -114,15 +113,15 @@ class Petshop:
                     print(f'{nome} não possui o telefone: {telefone}')
                     return True
         else:
-            print(f'O cliente {nome} não possui cadastro no sistema')
+            print(f'O(a) cliente {nome} não possui cadastro no sistema')
         return True
 
     def contratar_banhista(self):
-        nome = input('Digite o nome do banhista: ').title()
+        nome = input('Digite o nome do(a) banhista: ').title()
 
         valida_email = True
         while valida_email:
-            email = input(f'Digite o email do banhista {nome}: ')
+            email = input(f'Digite o email do(a) banhista {nome}: ')
             if not self.validar_email(email):
                 print(f'E-mail invalido! Digite um email válido.')
             else:
@@ -130,25 +129,25 @@ class Petshop:
 
         valida_telefone = True
         while valida_telefone:
-            telefone = input(f'Digite o telefone do banhista {nome}: ').strip()
+            telefone = input(f'Digite o telefone do(a) banhista {nome}: ').strip()
             if not self.validar_telefone(telefone):
                 print("Formato de telefone inválido.")
             else:
                 valida_telefone = False
 
-        salario = float(input(f'Digite o salario do banhista: '))
+        salario = float(input(f'Digite o salario do(a) banhista: '))
         data_admissao = datetime.now().strftime('%d/%m/%y')
         banhista = Banhista(nome, email, telefone, salario, data_admissao)
         self.banhista.contratar(banhista)
-        print(f'O banhista {nome} foi contratado com sucesso!')
+        print(f'O(a) banhista {nome} foi contratado com sucesso!')
         return True
 
     def contratar_medico(self):
-        nome = input('Digite o nome do médico: ').title()
+        nome = input('Digite o nome do(a) médico(a): ').title()
 
         valida_email = True
         while valida_email:
-            email = input(f'Digite o email do médico {nome}: ')
+            email = input(f'Digite o email do(a) médico(a) {nome}: ')
             if not self.validar_email(email):
                 print(f'E-mail invalido! Digite um email válido.')
             else:
@@ -156,18 +155,43 @@ class Petshop:
 
         valida_telefone = True
         while valida_telefone:
-            telefone = input(f'Digite o telefone do médico {nome}: ').strip()
+            telefone = input(f'Digite o telefone do(a) médico(a) {nome}: ').strip()
             if not self.validar_telefone(telefone):
                 print("Formato de telefone inválido.")
             else:
                 valida_telefone = False
 
-        crmv = input(f'Digite a CRMV do médico {nome}: ')
-        salario = float(input(f'Digite o salario do médico: '))
+        crmv = input(f'Digite a CRMV do(a) médico(a) {nome}: ')
+        salario = float(input(f'Digite o salario do(a) médico(a): '))
         data_admissao = datetime.now().strftime('%d/%m/%y')
         medico = MedicoVet(nome, email, telefone, salario, data_admissao, crmv)
         self.medicos.contratar(medico)
-        print(f'O médico {nome} foi contratado com sucesso!')
+        print(f'O(a) médico(a) {nome} foi contratado com sucesso!')
+        return True
+
+    def demitir_funcionario(self):
+        nome = input('Digite o nome do(a) funcionário(a) a ser demitido: ')
+        telefone = input(f'Digite o telefone do(a) funcionário(a) {nome}: ')
+
+        # Lista de tuplas com (categoria, objeto de dados)
+        categorias = [("banhista", self.banhista), ("médico", self.medicos)]
+
+        for cargo, modelo in categorias:
+            for dados in modelo.get_models():
+                if dados["nome"] == nome and dados["telefone"] == telefone:
+                    confirmacao = input(
+                        f'O(a) {cargo} {nome} será demitido(a) e permanentemente removido do sistema. Deseja prosseguir? (S/n): '
+                    ).lower()
+
+                    if confirmacao == 's':
+                        modelo.get_models().remove(dados)
+                        modelo.save()
+                        print(f'O(a) {cargo} {nome} foi demitido(a).')
+                    else:
+                        print('Operação cancelada.')
+                    return True
+
+        print('Funcionário(a) não encontrado.')
         return True
 
     #Garante que o email e o telefone estejam em formato convencional
