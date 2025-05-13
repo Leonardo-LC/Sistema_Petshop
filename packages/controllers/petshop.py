@@ -3,6 +3,7 @@ from packages.models.animal import Animal
 from packages.models.cliente import Cliente
 from packages.models.medicovet import MedicoVet
 from packages.models.banhista import Banhista
+from packages.controllers.validadores import Validadores
 import webbrowser
 from datetime import datetime
 import re
@@ -53,7 +54,7 @@ class Petshop:
         valida_nome = True
         while valida_nome:
             nome = input('Digite o nome do(a) cliente: ')
-            if not self.validar_nome(nome):
+            if not Validadores.validar_nome(self,nome):
                 print('Nome inválido.')
             else:
                 valida_nome = False
@@ -61,7 +62,7 @@ class Petshop:
         valida_email = True
         while valida_email:
             email = input(f'Digite o email do(a) cliente {nome}: ')
-            if not self.validar_email(email):
+            if not Validadores.validar_email(self,email):
                 print(f'E-mail invalido! Digite um email válido.')
             else:
                 valida_email = False
@@ -69,7 +70,7 @@ class Petshop:
         valida_telefone = True
         while valida_telefone:
             telefone = input(f'Digite o telefone do(a) cliente {nome}: ').strip()
-            if not self.validar_telefone(telefone):
+            if not Validadores.validar_telefone(self,telefone):
                 print("Formato de telefone inválido.")
             else:
                 valida_telefone = False
@@ -218,14 +219,14 @@ class Petshop:
 
     #Garante que o email e o telefone estejam em formato convencional
 
-    def validar_email(self, email: str) -> bool:
-        padrao = r'^[\w\.-]+@[\w\.-]+\.\w{2,}$'
-        return re.match(padrao, email) is not None
+    #def validar_email(self, email: str) -> bool:
+    #    padrao = r'^[\w\.-]+@[\w\.-]+\.\w{2,}$'
+    #    return re.match(padrao, email) is not None
 
-    def validar_telefone(self, telefone: str) -> bool:
-        padrao = r'^\(?\d{2}\)?\s?\d{4,5}-?\d{4}$'
-        return re.match(padrao, telefone) is not None
+    #def validar_telefone(self, telefone: str) -> bool:
+    #    padrao = r'^\(?\d{2}\)?\s?\d{4,5}-?\d{4}$'
+    #    return re.match(padrao, telefone) is not None
 
-    def validar_nome(self, nome: str) -> bool:
-        padrao = r'^[A-Za-zÀ-ÖØ-öø-ÿ\s\-]+$'
-        return re.match(padrao, nome) is not None and len(nome.strip()) >= 3
+    #def validar_nome(self, nome: str) -> bool:
+    #    padrao = r'^[A-Za-zÀ-ÖØ-öø-ÿ\s\-]+$'
+    #    return re.match(padrao, nome) is not None and len(nome.strip()) >= 3
