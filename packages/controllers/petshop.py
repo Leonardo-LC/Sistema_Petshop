@@ -21,8 +21,8 @@ class Petshop:
             '3': self.contratar_banhista,
             '4': self.contratar_medico,
             '5': self.demitir_funcionario,
-            #'6': self.mostrar_funcionarios_html,
-            #'7': self.sair
+            #'6': self.gerar_relatorio_html,
+            '7': self.sair
 
         }
 
@@ -76,12 +76,18 @@ class Petshop:
 
             quantidade = int(input(f"Digite quantos pets o(a) cliente {nome} possui: "))
             for i in range(quantidade):
-                nome_pet = input(f'Digite o nome do {i+1}º pet: ')
-                nome_pet = nome_pet.title()
+                nome_pet = input(f'Digite o nome do {i+1}º pet: ').title()
                 idade = input(f'Digite a idade do pet: ')
                 peso = input(f"Difite o peso do pet: ")
-                tipo = input(f'Digite o tipo do animal: ')
-                tipo = tipo.title()
+
+                cg = True
+                while cg:
+                    tipo = input(f'{nome_pet} é um gato ou cachorro? ').title()
+                    if tipo == 'Cachorro' or tipo == 'Gato':
+                        cg = False
+                    else:
+                        print('No momento atendemos apenas cachorros e gatos.')
+
                 servicos = []
                 print(f"Digite os serviços que serão realizados em {nome_pet}. Digite 'fim' para encerrar.")
                 while True:
@@ -179,7 +185,7 @@ class Petshop:
         return True
 
     def demitir_funcionario(self):
-        nome = input('Digite o nome do(a) funcionário(a) a ser demitido: ')
+        nome = input('Digite o nome do(a) funcionário(a) a ser demitido: ').title()
         telefone = input(f'Digite o telefone do(a) funcionário(a) {nome}: ')
 
         categorias = [("banhista", self.banhista), ("médico", self.medicos)]
@@ -201,6 +207,7 @@ class Petshop:
 
         print('Funcionário(a) não encontrado.')
         return True
+
 
 
     #Garante que o email e o telefone estejam em formato convencional
