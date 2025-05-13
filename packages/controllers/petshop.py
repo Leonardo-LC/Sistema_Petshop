@@ -49,8 +49,14 @@ class Petshop:
         return False
 
     def cadastrar_cliente(self):
-        nome = input('Digite o nome do(a) cliente: ')
-        nome = nome.title()
+
+        valida_nome = True
+        while valida_nome:
+            nome = input('Digite o nome do(a) cliente: ')
+            if not self.validar_nome(nome):
+                print('Nome inválido.')
+            else:
+                valida_nome = False
 
         valida_email = True
         while valida_email:
@@ -219,3 +225,7 @@ class Petshop:
     def validar_telefone(self, telefone: str) -> bool:
         padrao = r'^\(?\d{2}\)?\s?\d{4,5}-?\d{4}$'
         return re.match(padrao, telefone) is not None
+
+    def validar_nome(self, nome: str) -> bool:
+        padrao = r'^[A-Za-zÀ-ÖØ-öø-ÿ\s\-]+$'
+        return re.match(padrao, nome) is not None and len(nome.strip()) >= 3
