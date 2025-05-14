@@ -6,7 +6,7 @@ from packages.models.banhista import Banhista
 from packages.controllers.validadores import Validadores
 import webbrowser
 from datetime import datetime
-import re
+
 
 class Petshop:
 
@@ -87,22 +87,34 @@ class Petshop:
                 idade = input(f'Digite a idade do pet: ')
                 peso = input(f"Difite o peso do pet: ")
 
-                cg = True
-                while cg:
-                    tipo = input(f'{nome_pet} é um gato ou cachorro? ').title()
-                    if tipo == 'Cachorro' or tipo == 'Gato':
-                        cg = False
+                type = True
+                while type:
+                    tipo = input(f"{nome_pet} é um gato, cachorro, coelho ou hamster? ").strip().title()
+                    if tipo == 'Cachorro' or tipo == 'Gato' or tipo == 'Coelho' or tipo == 'Hamster':
+                        type = False
                     else:
-                        print('No momento atendemos apenas cachorros e gatos.')
+                        print('No momento atendemos apenas cachorros,gatos, coelhos e hamsters.')
 
                 servicos = []
-                print(f"Digite os serviços que serão realizados em {nome_pet}. Digite 'fim' para encerrar.")
+                print(f"""
+                Digite os serviços que serão realizados em {nome_pet}.
+                Digite 'fim' para encerrar.
+                Opções disponíveis:
+                - Banho
+                - Tosa
+                - Cortar unhas
+                - Consulta
+                - Check-up
+                """)
+
                 while True:
-                    servico = input("Serviço: ").strip()
+                    servico = input("Serviço: ").title().strip()
                     if servico.lower() == "fim":
                         break
-                    if servico:
+                    if servico == 'Banho' or servico == 'Tosa' or servico == 'Consulta' or servico == 'Cortar unhas':
                         servicos.append(servico)
+                    else:
+                        print(f'Infelizmente o serviço {servico} ainda não está diponível.')
 
                 pet = Animal(nome_pet, int(idade), float(peso), tipo, cliente)
                 for servico in servicos:
@@ -144,7 +156,7 @@ class Petshop:
         valida_email = True
         while valida_email:
             email = input(f'Digite o email do(a) banhista {nome}: ')
-            if not self.validar_email(email):
+            if not Validadores.validar_email(self, email):
                 print(f'E-mail invalido! Digite um email válido.')
             else:
                 valida_email = False
@@ -152,7 +164,7 @@ class Petshop:
         valida_telefone = True
         while valida_telefone:
             telefone = input(f'Digite o telefone do(a) banhista {nome}: ').strip()
-            if not self.validar_telefone(telefone):
+            if not Validadores.validar_telefone(self,telefone):
                 print("Formato de telefone inválido.")
             else:
                 valida_telefone = False
@@ -170,7 +182,7 @@ class Petshop:
         valida_email = True
         while valida_email:
             email = input(f'Digite o email do(a) médico(a) {nome}: ')
-            if not self.validar_email(email):
+            if not Validadores.validar_email(self,email):
                 print(f'E-mail invalido! Digite um email válido.')
             else:
                 valida_email = False
@@ -178,7 +190,7 @@ class Petshop:
         valida_telefone = True
         while valida_telefone:
             telefone = input(f'Digite o telefone do(a) médico(a) {nome}: ').strip()
-            if not self.validar_telefone(telefone):
+            if not Validadores.validar_telefone(self,telefone):
                 print("Formato de telefone inválido.")
             else:
                 valida_telefone = False
