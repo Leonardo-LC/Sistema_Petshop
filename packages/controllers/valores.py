@@ -44,4 +44,14 @@ class Valores:
     def chekup(self):
         return 200
 
+    @staticmethod
+    def valor_servico(servico: str, peso: float = None) -> float:
 
+        servicos = {
+            'banho': Valores().banho(peso) if peso is not None else 0,
+            'tosa': Valores().tosa(peso) if peso is not None else 0,
+            'cortar unhas': Valores().corte_unhas(peso) if peso is not None else 0,
+            'consulta': Valores().consulta(peso) if peso is not None else 0,
+            'chekup': Valores().chekup()
+        }
+        return servicos.get(servico.lower(), 0)

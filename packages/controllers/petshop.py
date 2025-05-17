@@ -4,8 +4,10 @@ from packages.models.cliente import Cliente
 from packages.models.medicovet import MedicoVet
 from packages.models.banhista import Banhista
 from packages.controllers.validadores import Validadores
+from packages.controllers.valores import Valores
 import webbrowser
 from datetime import datetime
+
 
 
 class Petshop:
@@ -53,7 +55,7 @@ class Petshop:
 
         valida_nome = True
         while valida_nome:
-            nome = input('Digite o nome do(a) cliente: ')
+            nome = input('Digite o nome do(a) cliente: ').title()
             if not Validadores.validar_nome(self,nome):
                 print('Nome inválido.')
             else:
@@ -95,33 +97,38 @@ class Petshop:
                     else:
                         print('No momento atendemos apenas cachorros,gatos, coelhos e hamsters.')
 
-                servicos = []
+                servicos = {}
                 print(f"""
-                Digite os serviços que serão realizados em {nome_pet}.
-                Digite 'fim' para encerrar.
-                Opções disponíveis:
-                - Banho
-                - Tosa
-                - Cortar unhas
-                - Consulta
-                - Check-up
-                """)
+Digite os serviços que serão realizados em {nome_pet}.
+Digite 'fim' para encerrar.
+Opções disponíveis:
+- Banho
+- Tosa
+- Cortar unhas
+- Consulta
+""")
 
                 while True:
-                    servico = input("Serviço: ").title().strip()
-                    if servico.lower() == "fim":
+                    servico = input("Serviço: ").strip().lower()
+                    if servico == "fim":
                         break
-                    if servico == 'Banho' or servico == 'Tosa' or servico == 'Consulta' or servico == 'Cortar unhas':
-                        servicos.append(servico)
+                    elif servico in ['banho', 'tosa', 'consulta', 'cortar unhas', 'chekup']:
+                        if servico in ['banho', 'tosa', 'consulta', 'cortar unhas']:
+                            valor = Valores.valor_servico(servico, float(peso))
+                        else:  # chekup
+                            valor = Valores.valor_servico(servico)
+                        servicos[servico] = valor
                     else:
-                        print(f'Infelizmente o serviço {servico} ainda não está diponível.')
+                        print(f'Infelizmente o serviço {servico} ainda não está disponível.')
 
                 pet = Animal(nome_pet, int(idade), float(peso), tipo, cliente)
-                for servico in servicos:
-                    pet.contratar_servicos(servico)
+                for servico, valor in servicos.items():
+                    pet.contratar_servicos(servico, valor)
 
             self.clientes.adicionar_cliente(cliente)
             print(f'Cliente {cliente} adicionado com sucesso!')
+
+            #print(pet.total_servicos()) teste para ver se o valor total está funcionando
 
         else:
             print(f'O(A) cliente {nome} já possui cadastro no sistema!')
