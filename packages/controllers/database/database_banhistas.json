@@ -5,5 +5,19 @@
         "telefone": "61 922222222",
         "salario": 2113.45,
         "data_admissao": "11/05/25"
+    },
+    {
+        "nome": "Sabrina Oliveira",
+        "email": "Sasa.oliveira@gmail.com",
+        "telefone": "61 944444444",
+        "salario": 2012.23,
+        "data_admissao": "11/05/25"
+    },
+    {
+        "nome": "Emanuel Xavier",
+        "email": "xaxieremanuel@outloo.com",
+        "telefone": "61 98765434",
+        "salario": 2150.14,
+        "data_admissao": "17/05/25"
     }
 ]

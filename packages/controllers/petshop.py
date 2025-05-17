@@ -24,7 +24,7 @@ class Petshop:
             '3': self.contratar_banhista,
             '4': self.contratar_medico,
             '5': self.demitir_funcionario,
-            #'6': self.gerar_relatorio_html,
+            '6': self.gerar_relatorio_html,
             '7': self.sair
 
         }
@@ -234,18 +234,192 @@ Opções disponíveis:
         print('Funcionário(a) não encontrado.')
         return True
 
+    def gerar_relatorio_html(self):
+
+        html_content = f"""
+        <html>
+        <head>
+            <title>Relatório {self.razao_social}</title>
+            <style>
+                body {{
+                    font-family: Arial, sans-serif;
+                    background-color: #f4f4f4;
+                    margin: 0;
+                    padding: 20px;
+                }}
+                h1 {{
+                    color: #333;
+                    text-align: center;
+                }}
+                .container {{
+                    width: 80%;
+                    margin: 0 auto;
+                    padding: 20px;
+                    background-color: white;
+                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                }}
+                table {{
+                    width: 100%;
+                    border-collapse: collapse;
+                    margin-top: 20px;
+                }}
+                table, th, td {{
+                    border: 1px solid #ddd;
+                }}
+                th, td {{
+                    padding: 8px;
+                    text-align: left;
+                }}
+                th {{
+                    background-color: #4CAF50;
+                    color: white;
+                }}
+                tr:nth-child(even) {{
+                    background-color: #f2f2f2;
+                }}
+                .footer {{
+                    text-align: center;
+                    margin-top: 30px;
+                    font-size: 14px;
+                    color: #777;# Salvar o conteúdo HTML em um arquivo
+        file_path = "relatorio.html"
+        with open(file_path, "w", encoding="utf-8") as f:
+            f.write(html_content)
+                }}
+            </style>
+        </head>
+        <body>
+            <h1>Relatório: {self.razao_social}</h1>
+            <div class="container">
+                
+                <h2>Clientes</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Nome</th>
+                            <th>Telefone</th>
+                            <th>Email</th>
+                            <th>Pets</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+        """
+
+        clientes = self.clientes.get_models()
+        if clientes:
+            for index, cliente in enumerate(clientes, start=1):
+                html_content += f"""
+                <tr>
+                    <td>{index}</td>
+                    <td>{cliente['nome']}</td>
+                    <td>{cliente['telefone']}</td>
+                    <td>{cliente['email']}</td>
+                    <td>
+                        <ul>
+                            {"".join([
+                    f"<li><strong>{pet['nome']}</strong> ({pet['tipo']}, {pet['idade']} anos, {pet['peso']}kg) - "
+                    f"Serviços: {', '.join(pet['servicos_contratados'].keys())} - "
+                    f"Total: R${sum(pet['servicos_contratados'].values()):.2f}</li>"
+                    for pet in cliente['pets']
+                ]) if cliente['pets'] else "Nenhum pet"}
+                        </ul>
+                    </td>
+                </tr>
+                """
+        else:
+            html_content += "<tr><td colspan='4'>Nenhum cliente cadastrado.</td></tr>"
+
+        html_content += """
+                </tbody>
+                </table>
+                
+                <h2>Médicos</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Nome</th>
+                            <th>Telefone</th>
+                            <th>Email</th>
+                            <th>Admissão</th>
+                            <th>CRMV</th>
+                            <th>Salário</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+        """
 
 
-    #Garante que o email e o telefone estejam em formato convencional
+        medicos = self.medicos.get_models()
+        if medicos:
+            for index, medico in enumerate(medicos, start=1):
+                html_content += f"""
+                <tr>
+                    <td>{index}</td>
+                    <td>{medico['nome']}</td>
+                    <td>{medico['telefone']}</td>
+                    <td>{medico['email']}</td>
+                    <td>{medico['data_admissao']}</td>
+                    <td>{medico['CRMV']}</td>
+                    <td>{medico['salario']}</td>
+                </tr>
+                """
+        else:
+            html_content += "<tr><td colspan='4'>Nenhum médico cadastrado.</td></tr>"
 
-    #def validar_email(self, email: str) -> bool:
-    #    padrao = r'^[\w\.-]+@[\w\.-]+\.\w{2,}$'
-    #    return re.match(padrao, email) is not None
 
-    #def validar_telefone(self, telefone: str) -> bool:
-    #    padrao = r'^\(?\d{2}\)?\s?\d{4,5}-?\d{4}$'
-    #    return re.match(padrao, telefone) is not None
+        html_content += """
+                </tbody>
+                </table>
 
-    #def validar_nome(self, nome: str) -> bool:
-    #    padrao = r'^[A-Za-zÀ-ÖØ-öø-ÿ\s\-]+$'
-    #    return re.match(padrao, nome) is not None and len(nome.strip()) >= 3
+                <h2>Banhistas</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Nome</th>
+                            <th>Residência</th>
+                            <th>Email</th>
+                            <th>Admissão</th>
+                            <th>Salário</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+        """
+
+        banhistas = self.banhista.get_models()
+        if banhistas:
+            for index, banhista in enumerate(banhistas, start=1):
+                html_content += f"""
+                <tr>
+                    <td>{index}</td>
+                    <td>{banhista['nome']}</td>
+                    <td>{banhista['telefone']}</td>
+                    <td>{banhista['email']}</td>
+                    <td>{banhista['data_admissao']}</td>
+                    <td>{banhista['salario']}</td>
+                </tr>
+                """
+        else:
+            html_content += "<tr><td colspan='4'>Nenhum banhista cadastrado.</td></tr>"
+
+        html_content += """
+                </tbody>
+                </table>
+            </div>
+            <div class="footer">
+                <p>&copy; 2024 Minha Empresa LTDA</p>
+            </div>
+        </body>
+        </html>
+        """
+
+        file_path = "relatorio.html"
+        with open(file_path, "w", encoding="utf-8") as f:
+            f.write(html_content)
+
+        print("Arquivo HTML gerado com sucesso: relatorio.html")
+
+        webbrowser.open(file_path)
+        return True
