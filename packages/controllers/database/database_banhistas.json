@@ -1,23 +1,16 @@
 [
     {
-        "nome": "Alexandre Gomes",
-        "email": "AlexGomes89@gmail.com",
-        "telefone": "61 922222222",
-        "salario": 2113.45,
-        "data_admissao": "11/05/25"
-    },
-    {
-        "nome": "Sabrina Oliveira",
-        "email": "Sasa.oliveira@gmail.com",
-        "telefone": "61 944444444",
-        "salario": 2012.23,
-        "data_admissao": "11/05/25"
-    },
-    {
-        "nome": "Emanuel Xavier",
-        "email": "xaxieremanuel@outloo.com",
-        "telefone": "61 98765434",
-        "salario": 2150.14,
+        "nome": "Leo",
+        "email": "leoanrdo@gmail.com",
+        "telefone": "61 987654324",
+        "salario": 1400.45,
         "data_admissao": "17/05/25"
+    },
+    {
+        "nome": "Mikael",
+        "email": "Miakel@outlook.com",
+        "telefone": "61 987774444",
+        "salario": 2302.2,
+        "data_admissao": "22/05/25"
     }
 ]

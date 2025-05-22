@@ -87,7 +87,8 @@ class Petshop:
             for i in range(quantidade):
                 nome_pet = input(f'Digite o nome do {i+1}º pet: ').title()
                 idade = input(f'Digite a idade do pet: ')
-                peso = input(f"Difite o peso do pet: ")
+                p = input(f"Difite o peso do pet: ")
+                peso = p.replace(",", ".").strip()
 
                 type = True
                 while type:
@@ -162,7 +163,7 @@ Opções disponíveis:
 
         valida_email = True
         while valida_email:
-            email = input(f'Digite o email do(a) banhista {nome}: ')
+            emaifl = input(f'Digite o email do(a) banhista {nome}: ')
             if not Validadores.validar_email(self, email):
                 print(f'E-mail invalido! Digite um email válido.')
             else:
@@ -423,3 +424,4 @@ Opções disponíveis:
 
         webbrowser.open(file_path)
         return True
+

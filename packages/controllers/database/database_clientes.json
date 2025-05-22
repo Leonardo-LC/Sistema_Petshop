@@ -1,28 +1,89 @@
 [
     {
-        "nome": "Larissa Silva",
-        "email": "lari@gmail.com",
-        "telefone": "61 987654321",
+        "nome": "Leo",
+        "email": "leo@gmail.com",
+        "telefone": "61 987564231",
         "pets": [
             {
-                "nome": "Arlin",
-                "idade": 7,
-                "peso": 15.0,
+                "nome": "Luk",
+                "idade": 1,
+                "peso": 5.0,
                 "tipo": "Cachorro",
-                "dono_nome": "Larissa Silva",
+                "dono_nome": "Leo",
+                "servicos_contratados": {
+                    "tosa": 50,
+                    "banho": 40
+                }
+            }
+        ]
+    },
+    {
+        "nome": "Mateus",
+        "email": "mateus@gmail.com",
+        "telefone": "61 789456125",
+        "pets": [
+            {
+                "nome": "Ze Bobi",
+                "idade": 5,
+                "peso": 20.0,
+                "tipo": "Cachorro",
+                "dono_nome": "Mateus",
                 "servicos_contratados": {
                     "banho": 60,
                     "tosa": 70
                 }
+            }
+        ]
+    },
+    {
+        "nome": "milena lira",
+        "email": "61 987654333",
+        "telefone": "lamilena@gmail.com",
+        "pets": []
+    },
+    {
+        "nome": "Giovana Garcia",
+        "email": "giovana@gmail.com",
+        "telefone": "61 369258147",
+        "pets": [
+            {
+                "nome": "Sauber",
+                "idade": 3,
+                "peso": 6.8,
+                "tipo": "Cachorro",
+                "dono_nome": "Giovana Garcia",
+                "servicos_contratados": {
+                    "banho": 50,
+                    "tosa": 60,
+                    "cortar unhas": 20,
+                    "consulta": 100
+                }
             },
             {
-                "nome": "Maverick",
-                "idade": 3,
+                "nome": "Falco",
+                "idade": 5,
                 "peso": 3.0,
-                "tipo": "Coelho",
-                "dono_nome": "Larissa Silva",
+                "tipo": "Gato",
+                "dono_nome": "Giovana Garcia",
                 "servicos_contratados": {
-                    "consulta": 100
+                    "cortar unhas": 20
+                }
+            }
+        ]
+    },
+    {
+        "nome": "Rafaella",
+        "email": "raffa@gmail.com",
+        "telefone": "61 96325871",
+        "pets": [
+            {
+                "nome": "Tobi",
+                "idade": 7,
+                "peso": 4.3,
+                "tipo": "Coelho",
+                "dono_nome": "Rafaella",
+                "servicos_contratados": {
+                    "banho": 40
                 }
             }
         ]
