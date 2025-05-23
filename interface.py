@@ -31,8 +31,8 @@ class PetshopInterface:
         self.form_frame.pack(fill=X, padx=5, pady=5)
 
         # Campos do formulário
-        labels = ['Código:', 'Nome*:', 'Telefone*:', 'Email*:']
-        entries = ['codigo_entry', 'nome_entry', 'telefone_entry', 'email_entry']
+        labels = ['Nome*:', 'Telefone*:', 'Email*:']
+        entries = ['nome_entry', 'telefone_entry', 'email_entry']
 
         for i, (label, entry) in enumerate(zip(labels, entries)):
             Label(self.form_frame, text=label, bg='#f0f0f0').grid(row=i, column=0, sticky=W, padx=5, pady=2)
@@ -48,7 +48,7 @@ class PetshopInterface:
         ]
 
         btn_frame = Frame(self.form_frame, bg='#f0f0f0')
-        btn_frame.grid(row=4, columnspan=2, pady=10)
+        btn_frame.grid(row=3, columnspan=2, pady=10)
 
         for text, command, color in botoes:
             Button(btn_frame, text=text, bg=color, fg='white',
@@ -59,7 +59,7 @@ class PetshopInterface:
                                       bg='#f0f0f0', fg='#333', font=('Arial', 10, 'bold'))
         self.lista_frame.pack(fill=BOTH, expand=True, padx=5, pady=5)
 
-        colunas = ['Código', 'Nome', 'Telefone', 'Email']
+        colunas = ['Nome', 'Telefone', 'Email']
         self.tree = ttk.Treeview(self.lista_frame, columns=colunas, show='headings')
 
         for col in colunas:
@@ -75,8 +75,7 @@ class PetshopInterface:
         self.tree.configure(yscrollcommand=scroll.set)
 
     def limpar_campos(self):
-        for entry in [self.codigo_entry, self.nome_entry,
-                      self.telefone_entry, self.email_entry]:
+        for entry in [self.nome_entry, self.telefone_entry, self.email_entry]:
             entry.delete(0, END)
 
     def carregar_clientes(self):
@@ -86,7 +85,6 @@ class PetshopInterface:
         clientes = self.serializador.get_models()
         for cliente in clientes:
             self.tree.insert('', END, values=(
-                cliente.get('codigo', ''),
                 cliente['nome'],
                 cliente['telefone'],
                 cliente['email']
@@ -97,25 +95,24 @@ class PetshopInterface:
         item = self.tree.selection()[0]
         valores = self.tree.item(item, 'values')
 
-        self.codigo_entry.insert(0, valores[0])
-        self.nome_entry.insert(0, valores[1])
-        self.telefone_entry.insert(0, valores[2])
-        self.email_entry.insert(0, valores[3])
+        self.nome_entry.insert(0, valores[0])
+        self.telefone_entry.insert(0, valores[1])
+        self.email_entry.insert(0, valores[2])
 
     def validar_campos(self):
         nome = self.nome_entry.get()
         telefone = self.telefone_entry.get()
         email = self.email_entry.get()
 
-        if not nome or not Validadores.validar_nome(nome):
+        if not nome or not Validadores.validar_nome(self, nome):
             messagebox.showerror("Erro", "Nome inválido! Deve ter pelo menos 3 caracteres.")
             return False
 
-        if not telefone or not Validadores.validar_telefone(telefone):
+        if not telefone or not Validadores.validar_telefone(self,telefone):
             messagebox.showerror("Erro", "Telefone inválido! Formato esperado: (XX)XXXXX-XXXX")
             return False
 
-        if not email or not Validadores.validar_email(email):
+        if not email or not Validadores.validar_email(self,email):
             messagebox.showerror("Erro", "Email inválido! Formato esperado: usuario@dominio.com")
             return False
 
@@ -137,18 +134,23 @@ class PetshopInterface:
         messagebox.showinfo("Sucesso", "Cliente adicionado com sucesso!")
 
     def editar_cliente(self):
-        codigo = self.codigo_entry.get()
-        if not codigo:
+        item_selecionado = self.tree.selection()
+        if not item_selecionado:
             messagebox.showerror("Erro", "Selecione um cliente para editar!")
             return
 
         if not self.validar_campos():
             return
 
+        # Obtém os valores atuais do item selecionado
+        valores = self.tree.item(item_selecionado[0], 'values')
+
         # Encontra o cliente na lista
         clientes = self.serializador.get_models()
         for i, cliente in enumerate(clientes):
-            if str(cliente.get('codigo', '')) == codigo:
+            if (cliente['nome'] == valores[0] and
+                    cliente['telefone'] == valores[1] and
+                    cliente['email'] == valores[2]):
                 # Atualiza os dados
                 clientes[i]['nome'] = self.nome_entry.get()
                 clientes[i]['telefone'] = self.telefone_entry.get()
@@ -160,14 +162,20 @@ class PetshopInterface:
         messagebox.showinfo("Sucesso", "Cliente atualizado com sucesso!")
 
     def remover_cliente(self):
-        codigo = self.codigo_entry.get()
-        if not codigo:
+        item_selecionado = self.tree.selection()
+        if not item_selecionado:
             messagebox.showerror("Erro", "Selecione um cliente para remover!")
             return
 
+        valores = self.tree.item(item_selecionado[0], 'values')
+
         if messagebox.askyesno("Confirmar", "Deseja realmente remover este cliente?"):
             clientes = self.serializador.get_models()
-            clientes[:] = [c for c in clientes if str(c.get('codigo', '')) != codigo]
+            clientes[:] = [c for c in clientes if not (
+                    c['nome'] == valores[0] and
+                    c['telefone'] == valores[1] and
+                    c['email'] == valores[2]
+            )]
             self.serializador.save()
             self.carregar_clientes()
             self.limpar_campos()
