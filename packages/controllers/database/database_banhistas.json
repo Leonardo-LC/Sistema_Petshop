@@ -1,16 +1,16 @@
 [
     {
-        "nome": "Leo",
-        "email": "leoanrdo@gmail.com",
-        "telefone": "61 987654324",
-        "salario": 1400.45,
-        "data_admissao": "17/05/25"
-    },
-    {
         "nome": "Mikael",
         "email": "Miakel@outlook.com",
         "telefone": "61 987774444",
         "salario": 2302.2,
         "data_admissao": "22/05/25"
+    },
+    {
+        "nome": "jamily",
+        "email": "jam@oit.com",
+        "telefone": "61 456789456",
+        "salario": 2500.0,
+        "data_admissao": "01/04/2025"
     }
 ]

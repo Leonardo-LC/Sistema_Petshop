@@ -6,5 +6,13 @@
         "salario": 8000.0,
         "data_admissao": "22/05/25",
         "CRMV": "GO-15489"
+    },
+    {
+        "nome": "Heitor Lima",
+        "email": "heito@gmail.com",
+        "telefone": "61 987963369",
+        "salario": 10500.0,
+        "data_admissao": "01/05/2025",
+        "CRMV": "GO-1234"
     }
 ]

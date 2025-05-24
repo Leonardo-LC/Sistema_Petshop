@@ -36,12 +36,6 @@
         ]
     },
     {
-        "nome": "milena lira",
-        "email": "61 987654333",
-        "telefone": "lamilena@gmail.com",
-        "pets": []
-    },
-    {
         "nome": "Giovana Garcia",
         "email": "giovana@gmail.com",
         "telefone": "61 369258147",
@@ -84,6 +78,42 @@
                 "dono_nome": "Rafaella",
                 "servicos_contratados": {
                     "banho": 40
+                }
+            }
+        ]
+    },
+    {
+        "nome": "Maria",
+        "telefone": "61 123456147",
+        "email": "Mari@gmail.com",
+        "pets": [
+            {
+                "nome": "Atreus",
+                "idade": 12,
+                "peso": 10.0,
+                "tipo": "cachorro",
+                "dono_nome": "Maria",
+                "servicos_contratados": {
+                    "banho": 50,
+                    "tosa": 60
+                }
+            }
+        ]
+    },
+    {
+        "nome": "Emanuely",
+        "telefone": "61 987789789",
+        "email": "ame@gmail.com",
+        "pets": [
+            {
+                "nome": "jaca",
+                "idade": 12,
+                "peso": 5.0,
+                "tipo": "cachorro",
+                "dono_nome": "Emanuely",
+                "servicos_contratados": {
+                    "cortar unhas": 20,
+                    "consulta": 100
                 }
             }
         ]
