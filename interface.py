@@ -4,12 +4,14 @@ from packages.controllers.serializador import Serializador
 from packages.models.cliente import Cliente
 from packages.models.animal import Animal
 from packages.controllers.validadores import Validadores
+from packages.controllers.valores import Valores
 import re
 
 
 class PetshopInterface:
     def __init__(self, root):
         self.root = root
+        self.valores = Valores()
         self.configurar_janela()
         self.criar_widgets()
         self.serializador = Serializador("database_clientes.json")
@@ -17,7 +19,7 @@ class PetshopInterface:
 
     def configurar_janela(self):
         self.root.title("Sistema Petshop")
-        self.root.geometry("1200x600")  # Aumentei o tamanho para caber mais colunas
+        self.root.geometry("1200x600")
         self.root.configure(bg='#f0f0f0')
         self.root.resizable(True, True)
 
@@ -41,7 +43,7 @@ class PetshopInterface:
             getattr(self, entry).grid(row=i, column=1, padx=5, pady=2)
 
         # Campos do pet (lado direito)
-        labels_pet = ['Nome Pet*:', 'Idade*:', 'Peso (kg)*:', 'Tipo*:', 'Serviços (separados por vírgula):']
+        labels_pet = ['Nome Pet*:', 'Idade*:', 'Peso (kg)*:', 'Tipo*:', 'Serviços (banho,tosa,etc):']
         entries_pet = ['nome_pet_entry', 'idade_entry', 'peso_entry', 'tipo_entry', 'servicos_entry']
 
         for i, (label, entry) in enumerate(zip(labels_pet, entries_pet)):
@@ -191,7 +193,7 @@ class PetshopInterface:
                 idade = int(self.idade_entry.get())
                 peso = float(self.peso_entry.get())
                 tipo = self.tipo_entry.get()
-                servicos = [s.strip() for s in self.servicos_entry.get().split(',') if s.strip()]
+                servicos = [s.strip().lower() for s in self.servicos_entry.get().split(',') if s.strip()]
 
                 # Cria o pet
                 pet = Animal(
@@ -202,10 +204,13 @@ class PetshopInterface:
                     dono=cliente
                 )
 
-                # Adiciona serviços com valores padrão (poderia ser ajustado para pedir os valores)
+                # Adiciona serviços com valores calculados automaticamente
                 for servico in servicos:
-                    valor = 50.0  # Valor padrão, poderia ser um input adicional
-                    pet.contratar_servicos(servico, valor)
+                    valor = self.valores.valor_servico(servico, peso)
+                    if valor > 0:  # Só adiciona se o serviço for válido
+                        pet.contratar_servicos(servico, valor)
+                    else:
+                        messagebox.showwarning("Aviso", f"Serviço '{servico}' não reconhecido e será ignorado")
 
                 cliente.adicionar_pet(pet)
 
