@@ -32,3 +32,12 @@ Sistema desktop para gestão completa de petshops, incluindo cadastro de cliente
 1. Clone o repositório:
 ```bash
 git clone https://github.com/Leonardo-LC/Sistema_Petshop.git
+
+
+## 📥 Instalação das Dependências
+Execute no terminal:
+```bash
+# Instalar Tkinter 
+pip install tk
+
+
