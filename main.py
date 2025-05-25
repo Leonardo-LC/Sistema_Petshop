@@ -653,7 +653,7 @@ class PetshopInterface:
             self.limpar_campos_medico()
             messagebox.showinfo("Sucesso", "Médico removido com sucesso!")
 
-    # Métodos para Banhistas
+
     def limpar_campos_banhista(self):
         for entry in [self.banhista_nome_entry, self.banhista_email_entry, self.banhista_telefone_entry,
                       self.banhista_salario_entry, self.banhista_data_entry]:
@@ -762,6 +762,8 @@ class PetshopInterface:
             self.carregar_banhistas()
             self.limpar_campos_banhista()
             messagebox.showinfo("Sucesso", "Banhista removido com sucesso!")
+
+            
 
 
 if __name__ == "__main__":
