@@ -36,11 +36,7 @@ Sistema desktop para gestão completa de petshops, incluindo cadastro de cliente
 - **Adicionar um novo médico veterinário**: Cadastro com nome, especialidade e número do CRMV.
 - **Registrar um novo banhista**: Inclusão de dados pessoais de funcionários responsáveis por banho e tosa.
 
-### 3. Agendamento e Realização de Serviços
-- **Agendar um serviço para um pet**: Seleção do pet, escolha do serviço (banho, tosa, consulta), definição da data e cálculo automático do preço.
-- **Registrar a conclusão de um serviço**: Marcação como "concluído", salvando no histórico do animal.
-
-### 4. Relatórios e Consultas
+### 3. Relatórios e Consultas
 - **Gerar relatório de serviços por período**: Lista completa dos serviços realizados em determinado intervalo de tempo.
 - **Consultar dados de um cliente ou pet específico**: Busca rápida por nome para acesso ao cadastro e histórico.
 
