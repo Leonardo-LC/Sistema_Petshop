@@ -40,4 +40,6 @@ Execute no terminal:
 # Instalar Tkinter 
 pip install tk
 
+Executar o arquivo main.py
+
 
