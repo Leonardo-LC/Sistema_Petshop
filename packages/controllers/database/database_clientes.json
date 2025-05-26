@@ -117,22 +117,5 @@
                 }
             }
         ]
-    },
-    {
-        "nome": "Jorge",
-        "telefone": "61 987654369",
-        "email": "Jorge@hotmail.com",
-        "pets": [
-            {
-                "nome": "Tobias",
-                "idade": 5,
-                "peso": 5.4,
-                "tipo": "coelho",
-                "dono_nome": "Jorge",
-                "servicos_contratados": {
-                    "cortar unhas": 20
-                }
-            }
-        ]
     }
 ]
