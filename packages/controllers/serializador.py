@@ -4,7 +4,10 @@ import json
 class Serializador:
 
     def __init__(self, arquivo):
-        self.__arquivo = "packages/controllers/database/" + arquivo
+        import os
+
+        # Modifique a linha para:
+        self.__arquivo = os.path.join("packages", "controllers", "database", arquivo)
         self.__models = []
         self.read()
 
