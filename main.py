@@ -98,7 +98,7 @@ class PetshopInterface:
             ent.grid(row=i, column=1, padx=5, pady=5)
             setattr(self, entry, ent)
 
-        labels_pet = ['Nome Pet*:', 'Idade*:', 'Peso (kg)*:', 'Tipo*:', 'Serviços:']
+        labels_pet = ['Nome Pet*:', 'Idade*:', 'Peso (kg)*:', 'Tipo*(cachorro, gato, coelho ou hamster):', 'Serviços(banho, tosa, cortar unhas, consulta):']
         entries_pet = ['nome_pet_entry', 'idade_entry', 'peso_entry', 'tipo_entry', 'servicos_entry']
 
         for i, (label, entry) in enumerate(zip(labels_pet, entries_pet)):
